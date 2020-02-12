@@ -190,6 +190,7 @@ namespace Numerolog
         public static bool OpenAfterSave;
         public static bool SaveDayly;
         public static bool SaveImmun;
+        public static bool SaveIM;
 
         public static void SaveCFG()
         {
@@ -239,6 +240,10 @@ namespace Numerolog
 
             attr = xDoc.CreateAttribute("SaveImmun");
             attr.Value = SaveImmun.ToString();
+            n.Attributes.Append(attr);
+
+            attr = xDoc.CreateAttribute("SaveIM");
+            attr.Value = SaveIM.ToString();
             n.Attributes.Append(attr);
 
 
@@ -327,6 +332,20 @@ namespace Numerolog
                 catch (Exception ex)
                 {
                     SaveImmun = false;
+                }
+
+
+                try
+                {
+                    attr = n.Attributes["SaveIM"];
+                    if (attr.Value.ToLower() == "true")
+                        SaveIM = true;
+                    else
+                        SaveIM = false;
+                }
+                catch (Exception ex)
+                {
+                    SaveIM = false;
                 }
 
 

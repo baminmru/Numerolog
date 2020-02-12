@@ -37,6 +37,14 @@ namespace Numerolog
         private int[] IMUNBlue;
         private int[] IMUNRed;
 
+        private int[] IMLine;
+        private int[] IMBarsPlus;
+        private int[] IMBarsMinus;
+
+
+        private int KExtS;
+        private int[] kIntS;
+
 
         #endregion
         #region "load_save"
@@ -57,8 +65,11 @@ namespace Numerolog
                 int pos = 0;
                 if (chkDayly.Checked)
                     height += tabDayly.Height;
-                if(chkImmun.Checked)
-                    height += tabDayly.Height;
+                if(chkIM.Checked)
+                    height += tabIM.Height;
+                if (chkIMUN.Checked)
+                    height += tabIMMUNITY.Height;
+
 
                 string fn = Path.Combine(Util.SavePath, txtF.Text +"_"+txtI.Text +"_" + txtO.Text + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")+ ".png");
                 Bitmap bmp = new Bitmap(tabParams.Width, height);
@@ -89,12 +100,24 @@ namespace Numerolog
                     pos += tabDayly.Height;
                 }
 
-                if (chkImmun.Checked)
+                if (chkIM.Checked)
+                {
+                    mainTab.SelectedTab = tabIM;
+                    tabIM.DrawToBitmap(bmp, new Rectangle(0, pos,
+                              tabParams.Width, tabIMMUNITY.Height));
+                    pos += tabIM.Height;
+                }
+
+                if (chkIMUN.Checked)
                 {
                     mainTab.SelectedTab = tabIMMUNITY;
                     tabIMMUNITY.DrawToBitmap(bmp, new Rectangle(0, pos,
                               tabParams.Width, tabIMMUNITY.Height));
+                    pos += tabIMMUNITY.Height;
                 }
+
+
+               
                 bmp.Save(fn, ImageFormat.Png);
 
                 mainTab.SelectedTab = tabParams;
@@ -116,22 +139,27 @@ namespace Numerolog
             //txtLOG.Visible = true;
         }
 
-  
+
+        private bool InLoad = false;
 
         private void Form1_Load(object sender, EventArgs e)
         {
             Util.ReadCFG();
+            InLoad = true;
             txtSaveFolder.Text = Util.SavePath;
             chkOpenSavedFile.Checked = Util.OpenAfterSave;
             chkDayly.Checked = Util.SaveDayly;
-            chkImmun.Checked = Util.SaveImmun;
+            chkIM.Checked = Util.SaveIM;
+            chkIMUN.Checked = Util.SaveImmun;
+            InLoad = false;
         }
 
         private void chkOpenSavedFile_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (InLoad) return;
             Util.SaveDayly = chkDayly.Checked;
-            Util.SaveImmun = chkImmun.Checked;
+            Util.SaveImmun = chkIMUN.Checked;
+            Util.SaveIM = chkIM.Checked;
             Util.OpenAfterSave = chkOpenSavedFile.Checked;
             Util.SaveCFG();
         }
@@ -578,6 +606,168 @@ namespace Numerolog
         }
 
         #endregion
+
+        #region "Иммунитет"
+
+        private void loadChartIM()
+        {
+            double valAvg = 0.0;
+
+            int ii;
+
+            IMBarsMinus = new int[111];
+            IMBarsPlus = new int[111];
+            IMLine = new int[10];
+            bool IsMinus = true;
+
+            IMBarsMinus[0] = 10;
+            IMBarsPlus[0] = 0;
+
+
+            for (int i = 0; i < 110; i++)
+            {
+                if(i >0 && i % kG[1] == 0)
+                {
+                    IsMinus = !IsMinus;
+                }
+                if (IsMinus)
+                {
+                    IMBarsMinus[i+1] = 10;
+                    IMBarsPlus[i+1] = 0;
+                }
+                else
+                {
+                    IMBarsMinus[i+1] = 0;
+                    IMBarsPlus[i+1] = 10;
+                }
+
+            }
+            
+
+        
+           
+            for (int l = 0; l < 10; l++)
+            {
+                IMLine[l] = Util.MOD90(kIntS[l % 8] );
+            }
+            
+
+            chartIM.Titles.Clear();
+            chartIM.Titles.Add("Иммунитет");
+
+            // Set chart title font
+            chartIM.Titles[0].Font = new Font("Times New Roman", 14, FontStyle.Bold);
+
+            // Set chart title color
+            chartIM.Titles[0].ForeColor = Color.Blue;
+
+            // Set border title color
+            // chartIM.Titles[0].BorderColor = Color.Black
+
+            // Set background title color
+            chartIM.Titles[0].BackColor = Color.White;
+
+            // Set Title Alignment
+            chartIM.Titles[0].Alignment = System.Drawing.ContentAlignment.MiddleCenter;
+
+            // Set Title Alignment
+            chartIM.Titles[0].ToolTip = chartIM.Titles[0].Text;
+
+
+            chartIM.Series.Clear();
+
+
+            valAvg = 0.0;
+
+            for (ii = 0; ii < 8; ii++)
+            {
+
+                valAvg += kIntS[ii];
+            }
+            valAvg /= 8.0;
+
+
+            string seriesName;
+            DateTime d;
+
+            chartIM.ChartAreas[0].AxisX.Interval = 10;
+            chartIM.ChartAreas[0].AxisX.Minimum = 0;
+
+            chartIM.ChartAreas[0].AxisX.MajorGrid.Enabled = true;
+            chartIM.ChartAreas[0].AxisX.MajorGrid.Interval = 10;
+            chartIM.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Black;
+            
+
+            //chartIM.ChartAreas[0].AxisX.MinorGrid.Enabled = true;
+            //chartIM.ChartAreas[0].AxisX.MinorGrid.Interval = 1;
+            //chartIM.ChartAreas[0].AxisX.MinorGrid.LineColor = Color.Black;
+            //chartIM.ChartAreas[0].AxisX.MinorGrid.LineDashStyle = ChartDashStyle.Dot;
+
+            chartIM.ChartAreas[0].AxisY.Interval = 1;
+            chartIM.ChartAreas[0].AxisY.MajorGrid.Interval = 1;
+            chartIM.ChartAreas[0].AxisY.Minimum = 0;
+            chartIM.ChartAreas[0].AxisY.Maximum = 10;
+
+            seriesName = "Иммунитет";
+            chartIM.Series.Add(seriesName);
+            chartIM.Series[seriesName].ChartType = SeriesChartType.Line;
+            chartIM.Series[seriesName].BorderWidth = 3;
+            chartIM.Series[seriesName].Color = Color.Blue;
+            chartIM.Series[seriesName].Label = "#VAL{#,##0}";
+
+            seriesName = "Среднее = " + valAvg.ToString("#0.00");
+            chartIM.Series.Add(seriesName);
+            chartIM.Series[seriesName].ChartType = SeriesChartType.Line;
+            chartIM.Series[seriesName].Color = Color.Brown;
+            chartIM.Series[seriesName].BorderWidth = 3;
+
+            seriesName = "Минусовая сота";
+            chartIM.Series.Add(seriesName);
+            chartIM.Series[seriesName].ChartType = SeriesChartType.Column;
+            chartIM.Series[seriesName].BorderWidth = 8;
+            chartIM.Series[seriesName].Color = Color.FromArgb(128, 128, 0, 0);
+            
+
+            seriesName = "Плюсовая сота";
+            chartIM.Series.Add(seriesName);
+            chartIM.Series[seriesName].ChartType = SeriesChartType.Column;
+            chartIM.Series[seriesName].BorderWidth = 8;
+            chartIM.Series[seriesName].Color = Color.FromArgb(128, 0, 128, 0);
+
+
+         
+
+
+
+            
+
+            for (ii = 0; ii < 110; ii++)
+            {
+                seriesName = "Минусовая сота";
+                chartIM.Series[seriesName].Points.AddXY(ii, IMBarsMinus[ii]);
+                
+                seriesName = "Плюсовая сота";
+                chartIM.Series[seriesName].Points.AddXY(ii, IMBarsPlus[ii]);
+
+                seriesName = "Среднее = " + valAvg.ToString("#0.00");
+                chartIM.Series[seriesName].Points.AddXY(ii, valAvg);
+            }
+
+
+            seriesName = "Иммунитет";
+            chartIM.Series[seriesName].Points.AddXY(0, 0);
+
+            for (ii = 0; ii < 10; ii++)
+            {
+                chartIM.Series[seriesName].Points.AddXY((ii+1)*10 + IMLine[ii], IMLine[ii]);
+            }
+
+        }
+
+
+        #endregion
+
+
         #region "Напряженность иммунитета"
 
         private void IMMUNITYCalc()
@@ -623,10 +813,13 @@ namespace Numerolog
             sOut = "";
             Util.WriteLine("ВТЗ=" + ((sumSB * 100.0 / 72.0)).ToString("#00.00"));
 
-            int KExtS = (sB[0] * 10 + sB[1]) * (sB[2] * 10 + sB[3]) * (sB[4] * 1000 + sB[5] * 100 + sB[6] * 10 + sB[7]);
+            KExtS = (sB[0] * 10 + sB[1]) * (sB[2] * 10 + sB[3]) * (sB[4] * 1000 + sB[5] * 100 + sB[6] * 10 + sB[7]);
             Util.WriteLine("Код Внешней Среды=" + KExtS.ToString());
-
-            int[] kIntS = Util.REVERS2INTS(KExtS.ToString());
+            while(KExtS.ToString().Length < 8)
+            {
+                KExtS *= 10;
+            }
+            kIntS = Util.REVERS2INTS(KExtS.ToString());
 
             sOut = "";
             for (int l = 0; l < kIntS.Length; l++)
@@ -665,23 +858,14 @@ namespace Numerolog
             txtPVCH.Text = pchv.ToString("#00.00");
 
 
-            IMUNBlue = new int[8 * 12];
-            IMUNRed = new int[8 * 12];
-
-            for(int m = 0; m < 12; m++)
-            {
-                for(int l = 0; l < 8; l++)
-                {
-                    IMUNBlue[m * 8 + l] = Util.MOD90(kIntS[l] + m);
-                    IMUNRed[m * 8 + l] = Util.MOD90(sB[l] + m);
-
-                   // Util.WriteLine("Год= " + (m * 8 + l).ToString() + " И= " + IMUNBlue[m * 8 + l].ToString() + " Б= " + IMUNRed[m * 8 + l].ToString());
-                }
-            }
+            
 
             loadChartIMUNITY();
 
+            loadChartIM();
+
         }
+
 
         private void loadChartIMUNITY()
         {
@@ -690,8 +874,22 @@ namespace Numerolog
             int ii;
 
 
+            IMUNBlue = new int[8 * 12];
+            IMUNRed = new int[8 * 12];
+
+            for (int m = 0; m < 12; m++)
+            {
+                for (int l = 0; l < 8; l++)
+                {
+                    IMUNBlue[m * 8 + l] = Util.MOD90(kIntS[l] + m);
+                    IMUNRed[m * 8 + l] = Util.MOD90(sB[l] + m);
+
+                    // Util.WriteLine("Год= " + (m * 8 + l).ToString() + " И= " + IMUNBlue[m * 8 + l].ToString() + " Б= " + IMUNRed[m * 8 + l].ToString());
+                }
+            }
+
             chartIMUN.Titles.Clear();
-            chartIMUN.Titles.Add("График иммунитета");
+            chartIMUN.Titles.Add("Напряженность иммунитета");
 
             // Set chart title font
             chartIMUN.Titles[0].Font = new Font("Times New Roman", 14, FontStyle.Bold);
@@ -719,7 +917,7 @@ namespace Numerolog
             for (ii = 0; ii < 8; ii++)
             {
              
-                valAvg += Util.MOD9(sB[ii]);
+                valAvg += sB[ii];
             }
             valAvg /= 8;
 

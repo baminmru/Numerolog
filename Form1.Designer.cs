@@ -32,6 +32,9 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -164,7 +167,7 @@
             this.label43 = new System.Windows.Forms.Label();
             this.chartIMUN = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabConfig = new System.Windows.Forms.TabPage();
-            this.chkImmun = new System.Windows.Forms.CheckBox();
+            this.chkIM = new System.Windows.Forms.CheckBox();
             this.chkDayly = new System.Windows.Forms.CheckBox();
             this.chkOpenSavedFile = new System.Windows.Forms.CheckBox();
             this.cmdSaveFolder = new System.Windows.Forms.Button();
@@ -172,6 +175,9 @@
             this.label33 = new System.Windows.Forms.Label();
             this.fbd = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.tabIM = new System.Windows.Forms.TabPage();
+            this.chartIM = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chkIMUN = new System.Windows.Forms.CheckBox();
             this.mainTab.SuspendLayout();
             this.tabParams.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numBHour)).BeginInit();
@@ -183,6 +189,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numImmFrom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartIMUN)).BeginInit();
             this.tabConfig.SuspendLayout();
+            this.tabIM.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartIM)).BeginInit();
             this.SuspendLayout();
             // 
             // mainTab
@@ -193,9 +201,10 @@
             this.mainTab.Controls.Add(this.tabParams);
             this.mainTab.Controls.Add(this.tabSOTI);
             this.mainTab.Controls.Add(this.tabDayly);
+            this.mainTab.Controls.Add(this.tabIM);
             this.mainTab.Controls.Add(this.tabIMMUNITY);
             this.mainTab.Controls.Add(this.tabConfig);
-            this.mainTab.Location = new System.Drawing.Point(16, 18);
+            this.mainTab.Location = new System.Drawing.Point(13, 21);
             this.mainTab.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.mainTab.Name = "mainTab";
             this.mainTab.SelectedIndex = 0;
@@ -1525,13 +1534,13 @@
             this.chartH.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chartH.Legends.Add(legend1);
-            this.chartH.Location = new System.Drawing.Point(15, 13);
+            this.chartH.Location = new System.Drawing.Point(3, 3);
             this.chartH.Name = "chartH";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chartH.Series.Add(series1);
-            this.chartH.Size = new System.Drawing.Size(1011, 607);
+            this.chartH.Size = new System.Drawing.Size(1033, 632);
             this.chartH.TabIndex = 0;
             this.chartH.Text = "chartH";
             // 
@@ -1595,23 +1604,23 @@
             // 
             // chartIMUN
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chartIMUN.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chartIMUN.Legends.Add(legend2);
-            this.chartIMUN.Location = new System.Drawing.Point(14, 47);
+            chartArea3.Name = "ChartArea1";
+            this.chartIMUN.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chartIMUN.Legends.Add(legend3);
+            this.chartIMUN.Location = new System.Drawing.Point(3, 43);
             this.chartIMUN.Name = "chartIMUN";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chartIMUN.Series.Add(series2);
-            this.chartIMUN.Size = new System.Drawing.Size(1011, 576);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chartIMUN.Series.Add(series3);
+            this.chartIMUN.Size = new System.Drawing.Size(1033, 592);
             this.chartIMUN.TabIndex = 1;
-            this.chartIMUN.Text = "chart1";
             // 
             // tabConfig
             // 
-            this.tabConfig.Controls.Add(this.chkImmun);
+            this.tabConfig.Controls.Add(this.chkIMUN);
+            this.tabConfig.Controls.Add(this.chkIM);
             this.tabConfig.Controls.Add(this.chkDayly);
             this.tabConfig.Controls.Add(this.chkOpenSavedFile);
             this.tabConfig.Controls.Add(this.cmdSaveFolder);
@@ -1624,16 +1633,16 @@
             this.tabConfig.Text = "Настройка";
             this.tabConfig.UseVisualStyleBackColor = true;
             // 
-            // chkImmun
+            // chkIM
             // 
-            this.chkImmun.AutoSize = true;
-            this.chkImmun.Location = new System.Drawing.Point(232, 217);
-            this.chkImmun.Name = "chkImmun";
-            this.chkImmun.Size = new System.Drawing.Size(266, 24);
-            this.chkImmun.TabIndex = 5;
-            this.chkImmun.Text = "Сохранить график иммунитета";
-            this.chkImmun.UseVisualStyleBackColor = true;
-            this.chkImmun.CheckedChanged += new System.EventHandler(this.chkOpenSavedFile_CheckedChanged);
+            this.chkIM.AutoSize = true;
+            this.chkIM.Location = new System.Drawing.Point(232, 217);
+            this.chkIM.Name = "chkIM";
+            this.chkIM.Size = new System.Drawing.Size(266, 24);
+            this.chkIM.TabIndex = 5;
+            this.chkIM.Text = "Сохранить график иммунитета";
+            this.chkIM.UseVisualStyleBackColor = true;
+            this.chkIM.CheckedChanged += new System.EventHandler(this.chkOpenSavedFile_CheckedChanged);
             // 
             // chkDayly
             // 
@@ -1687,6 +1696,42 @@
             this.label33.TabIndex = 0;
             this.label33.Text = "Папка для сохранения";
             // 
+            // tabIM
+            // 
+            this.tabIM.Controls.Add(this.chartIM);
+            this.tabIM.Location = new System.Drawing.Point(4, 29);
+            this.tabIM.Name = "tabIM";
+            this.tabIM.Size = new System.Drawing.Size(1039, 638);
+            this.tabIM.TabIndex = 5;
+            this.tabIM.Text = "Иммунитет";
+            this.tabIM.UseVisualStyleBackColor = true;
+            // 
+            // chartIM
+            // 
+            chartArea2.Name = "ChartArea1";
+            this.chartIM.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chartIM.Legends.Add(legend2);
+            this.chartIM.Location = new System.Drawing.Point(3, 3);
+            this.chartIM.Name = "chartIM";
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chartIM.Series.Add(series2);
+            this.chartIM.Size = new System.Drawing.Size(1033, 632);
+            this.chartIM.TabIndex = 1;
+            // 
+            // chkIMUN
+            // 
+            this.chkIMUN.AutoSize = true;
+            this.chkIMUN.Location = new System.Drawing.Point(232, 274);
+            this.chkIMUN.Name = "chkIMUN";
+            this.chkIMUN.Size = new System.Drawing.Size(388, 24);
+            this.chkIMUN.TabIndex = 6;
+            this.chkIMUN.Text = "Сохранить график напряженности иммунитета";
+            this.chkIMUN.UseVisualStyleBackColor = true;
+            this.chkIMUN.CheckedChanged += new System.EventHandler(this.chkOpenSavedFile_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -1716,6 +1761,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.chartIMUN)).EndInit();
             this.tabConfig.ResumeLayout(false);
             this.tabConfig.PerformLayout();
+            this.tabIM.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chartIM)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1855,9 +1902,12 @@
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.NumericUpDown numImmFrom;
         private System.Windows.Forms.Label label43;
-        private System.Windows.Forms.CheckBox chkImmun;
+        private System.Windows.Forms.CheckBox chkIM;
         private System.Windows.Forms.CheckBox chkDayly;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.TabPage tabIM;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartIM;
+        private System.Windows.Forms.CheckBox chkIMUN;
     }
 }
 
