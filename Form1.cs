@@ -58,7 +58,7 @@ namespace Numerolog
             //cmdSavePicture.Visible = false;
             //cmdCalc1.Visible = false;
             //txtLOG.Visible = false;
-            
+         
             try
             {
                 int height = cmdCalc1.Top + tabSOTI.Height;
@@ -151,6 +151,9 @@ namespace Numerolog
             chkDayly.Checked = Util.SaveDayly;
             chkIM.Checked = Util.SaveIM;
             chkIMUN.Checked = Util.SaveImmun;
+            dtpProgFrom.Value = DateTime.Today;
+            dtpProgTo.Value = DateTime.Today.AddDays(5);
+
             InLoad = false;
         }
 
@@ -303,10 +306,9 @@ namespace Numerolog
                 }
             }
 
-          
-
             DaylyCalc();
-            IMMUNITYCalc();
+
+            IMMUNITYCalc("ЗДОРОВЬЕ");
 
             CalcOutput();
         }
@@ -404,8 +406,113 @@ namespace Numerolog
             txtLOG.Text = Util.Log;
         }
 
+        private void cmdCalcWord_Click(object sender, EventArgs e)
+        {
+            string[] words = txtWORD.Text.ToUpper().Split(' ');
+
+
+            
+            
+            string sOut = "";
+            int sSum = 0;
+            foreach (string w in words)
+            {
+                if (w != "")
+                {
+                    int[] sTemp = Util.STRING2INTS(w);
+                    for (int l = 0; l < w.Length; l++)
+                    {
+                        sOut += w.Substring(l, 1) + " ";
+                    }
+
+                    sOut += "\r\n";
+
+                    for (int l = 0; l < sTemp.Length; l++)
+                    {
+
+                        sOut += sTemp[l].ToString() + " ";
+                        sSum += sTemp[l];
+                    }
+
+                    sOut += "\r\n\r\n";
+                }
+                
+            }
+            sOut += "СУММА = " + Util.MOD22(sSum).ToString();
+
+
+            sOut += "\r\n\r\n";
+
+            sOut += WordCalc(txtWORD.Text, txtF.Text + txtI.Text + txtO.Text);
+
+            if (sOut != "")
+                txtWordOut.Text = (sOut);
+
+
+
+
+
+           
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (dateCritFrom.Value >= dateCritTo.Value) return;
+            DateTime d = dateCritFrom.Value;
+            int eqCnt=0;
+            int[] kCH = new int[6];
+            StringBuilder sb = new StringBuilder();
+
+            while (d <= dateCritTo.Value)
+            {
+               
+
+                int cD = Util.MOD22(d.Day);
+                int cM = d.Month;
+                int cc = Util.NUM2CODE(d.Year.ToString());
+                int cY = Util.MOD22(cc);
+                
+                kCH[1] = Util.MOD22(Math.Abs(cD - cM));
+                kCH[2] = Util.MOD22(Math.Abs(cD - cY));
+                kCH[3] = Util.MOD22(Math.Abs(kCH[1] - kCH[2]));
+                kCH[4] = Util.MOD22(Math.Abs(cM - cY));
+                kCH[5] = Util.MOD22(kCH[1] + kCH[2] + kCH[3] + kCH[4]);
+
+                System.Diagnostics.Debug.Print(d.ToString("dd.MM.yyyy") + " " + kCH[1].ToString() + " " + kCH[1].ToString() + " " + kCH[2].ToString() + " " + kCH[3].ToString() + " " + kCH[4].ToString() + " " + kCH[5].ToString());
+                
+
+                for (int i=1;i<23;i++)
+                {
+                    eqCnt = 0;
+                    for (int j =1; j <= 5; j++)
+                    {
+                        if (i == kCH[j])
+                        {
+                            eqCnt++;
+                        }
+                    }
+                    if (eqCnt >= 3)
+                    {
+                        sb.AppendLine(d.ToString("dd.MM.yyyy") + " -> (" + eqCnt.ToString() + ")  [ " + kCH[1].ToString() + " " + kCH[2].ToString() + " " + kCH[3].ToString() + " " + kCH[4].ToString() + " " + kCH[5].ToString() + "]");
+                        break;
+                    }
+                }
+
+                
+
+                d = d.AddDays(1);
+            }
+
+            txtCritLog.Text = sb.ToString();
+
+
+        }
+
+
+
 
         #endregion
+
         #region "Суточная активность"
 
         private void DaylyCalc()
@@ -495,6 +602,207 @@ namespace Numerolog
             txtBNCH.Text = BNCH.ToString();
             txtKV.Text = KV.ToString();
             txtKB.Text = sumKB.ToString();
+        }
+
+        private void cmdProg_Click(object sender, EventArgs e)
+        {
+            Util.ClearLog();
+          
+            int bDay = bDate.Value.Day;
+            cD = Util.MOD22(bDate.Value.Day);
+            cM = bDate.Value.Month;
+            int cc = Util.NUM2CODE(bDate.Value.Year.ToString());
+            cY = Util.MOD22(cc);
+           
+            int V1, V2, V3, V4, V5, V6, V7;
+            int K;
+            int pD,pM,pY;
+
+            bool pMode;
+
+            if(bDay < 14 || bDay > 22)
+            {
+                pMode = false;
+         
+                V6 = 0;
+                V7 = 0;
+
+                V1 = Util.MOD22(Math.Abs(cD - cM));
+                V2 = Util.MOD22(Math.Abs(cD - cY));
+                V3 = Util.MOD22(Math.Abs(V1 - V2));
+                V4 = Util.MOD22(Math.Abs(cM - cY));
+                V5 = Util.MOD22(V1 + V2 + V3 + V4);
+                K = V1;
+            }
+            else
+            {
+                pMode = true;
+                V1 = cD;
+                V2 = Util.MOD22(Math.Abs(cD - cM));
+                V3 = Util.MOD22(Math.Abs(cD - cY));
+                V4 = Util.MOD22(Math.Abs(V2 - V3));
+                V5 = Util.MOD22(Math.Abs(cM - cY));
+                V6 = Util.MOD22( V2 + V3 + V4 + V5);
+                V7 = Util.MOD22( V1 + V2 + V3 + V4 + V5);
+                K = V2;
+            }
+
+            List<int> lV = new List<int>();
+            lV.Add(V1);
+            lV.Add(V2);
+            lV.Add(V3);
+            lV.Add(V4);
+            lV.Add(V5);
+            if (pMode)
+            {
+                lV.Add(V6);
+                lV.Add(V7);
+            }
+
+            int pR = 0;
+            if(chkProgFIO.Checked)
+                pR = Util.MOD22(Util.CODE_RU(txtF.Text + txtI.Text + txtO.Text));
+            else
+                pR = Util.MOD22(Util.CODE_RU(txtI.Text));
+
+            DateTime ProgDate;
+            DateTime yearBerthday;
+            ProgDate = dtpProgFrom.Value;
+
+
+            while(ProgDate <= dtpProgTo.Value)
+            {
+               
+
+                yearBerthday = new DateTime(ProgDate.Year, bDate.Value.Month, bDate.Value.Day);
+
+                if(ProgDate >= yearBerthday)
+                {
+                    pY = ProgDate.Year;
+                }
+                else
+                {
+                    pY = ProgDate.Year - 1;
+                }
+
+
+                // расчет на день
+                pM = ProgDate.Month;
+                pD = ProgDate.Day + bDate.Value.Day;
+                int days = DateTime.DaysInMonth(ProgDate.Year, ProgDate.Month);
+                if (pD > days)
+                {
+                    pD -= days;
+                }
+
+                if (pD > days)
+                {
+                    pD -= days;
+                    pM +=1;
+                }
+
+                /////////////////////////////////////////
+
+                DateTime pgDate = new DateTime(pY, pM, pD);
+                             
+
+                kB = Util.DATE2INTS(pgDate.ToString("ddMMyyyy"));
+                
+                
+               
+                int pQ = 0;
+                Util.WriteLine("--------------------------------------------------------");
+                for (int l = 0; l < kB.Length; l++)
+                {
+                    pQ += kB[l];
+                }
+                pQ = Util.MOD22(pQ);
+              
+                int pF;
+                int Dt, Mt, Yt, At;
+                if (pD > 22) 
+                    Dt = pD - 22;
+                else
+                    Dt = pD;
+                Mt = pM;
+                cc = Util.NUM2CODE(pY.ToString());
+                Yt = Util.MOD22(cc);
+
+                pF = Util.MOD22(Dt + Mt + Yt); 
+
+                decimal v =Math.Ceiling( (decimal) (pY - bDate.Value.Year ) / K);
+
+                int sig ;
+
+
+                if( ((int) v % 2) == 0)
+                {
+                    sig = -1;
+                }
+                else
+                {
+                    sig = 1;
+                }
+                
+                int pT = Util.MOD22( Math.Abs( pQ + pR   * sig));
+
+                int pL = Util.MOD22(Math.Abs(pF + pR * sig));
+
+               
+
+                string DayType = "+";
+
+                if(lV.Contains(pQ) || lV.Contains(pF))
+                {
+                    DayType = "-";
+                }else if (lV.Contains(pT) || lV.Contains(pL))
+                {
+                    DayType = "+-";
+                }
+
+                Util.WriteLine("Day: " + ProgDate.ToString("dd/MM/yyyy") + " -> PG Day: " + pgDate.ToString("dd/MM/yyyy") + " =  " + DayType);
+
+                if (pMode)
+                {
+                    Util.WriteLine("[ " + pQ.ToString()
+                    + ", " + pF.ToString()
+                    + ", " + pT.ToString()
+                    + ", " + pL.ToString()
+                    + "] -> [ " + V1.ToString()
+                    + ", " + V2.ToString()
+                    + ", " + V3.ToString()
+                    + ", " + V4.ToString()
+                    + ", " + V5.ToString()
+                    + ", " + V6.ToString()
+                    + ", " + V7.ToString()
+                    + "]"
+                    );
+                }
+                else
+                {
+                    Util.WriteLine("[ " + pQ.ToString()
+                    + ", " + pF.ToString()
+                    + ", " + pT.ToString()
+                    + ", " + pL.ToString()
+                    + "] -> [ " + V1.ToString()
+                    + ", " + V2.ToString()
+                    + ", " + V3.ToString()
+                    + ", " + V4.ToString()
+                    + ", " + V5.ToString()
+                    + "]"
+                    );
+                }
+
+                txtProgOut.Text = Util.Log;
+
+
+                //////////////////////////////////////////
+
+
+                ProgDate = ProgDate.AddDays(1);
+            }
+
+
         }
 
         private void loadChartH()
@@ -770,13 +1078,13 @@ namespace Numerolog
 
         #region "Напряженность иммунитета"
 
-        private void IMMUNITYCalc()
+        private void IMMUNITYCalc(string KEYWORD)
         {
             // код болезни
             Util.WriteLine("-------------- сила болезни ---------------");
             sB = Util.DATE2INTS(bDate.Value.ToString("ddMMyyyy"));
 
-            int[] tempSB = Util.STRING2INTS("ЗДОРОВЬЕ");
+            int[] tempSB = Util.STRING2INTS(KEYWORD);
             
             string sOut = "";
             for (int l = 0; l < sB.Length; l++)
@@ -846,7 +1154,7 @@ namespace Numerolog
                 sumBNum += BNum[l];
             }
             Util.WriteLine("ЧР=" + sumBNum.ToString());
-            Util.WriteLine("ЭС=" + ((sumBNum * 100.0 / 72.0)).ToString("#00.00"));
+            Util.WriteLine("ЭС [приведено к 100%] =" + ((sumBNum * 100.0 / 72.0)).ToString("#00.00"));
 
             txtSB.Text = sumSB.ToString();
             txtVTZ.Text =((sumSB * 100.0 / 72.0)).ToString("#00.00");
@@ -854,11 +1162,8 @@ namespace Numerolog
             txtEnS.Text = ((sumBNum * 100.0 / 72.0)).ToString("#00.00");
             double pchv =(((sumSB * 100.0 / 72.0) + (sumKIntS * 100.0 / 72.0) + (sumBNum * 100.0 / 72.0)) / 3);
             pchv = pchv * 100.0 / 80.0;
-            Util.WriteLine("ПЧВ=" + pchv.ToString("#00.00"));
-            txtPVCH.Text = pchv.ToString("#00.00");
-
-
-            
+            Util.WriteLine("ПЧВ [приведено к 100%]=" + pchv.ToString("#00.00"));
+            txtPVCH.Text = pchv.ToString("#00.00") ;
 
             loadChartIMUNITY();
 
@@ -874,15 +1179,16 @@ namespace Numerolog
             int ii;
 
 
-            IMUNBlue = new int[8 * 12];
-            IMUNRed = new int[8 * 12];
+            IMUNBlue = new int[8 * 12+1];
+            IMUNRed = new int[8 * 12+1];
+            
 
             for (int m = 0; m < 12; m++)
             {
                 for (int l = 0; l < 8; l++)
                 {
                     IMUNBlue[m * 8 + l] = Util.MOD90(kIntS[l] + m);
-                    IMUNRed[m * 8 + l] = Util.MOD90(sB[l] + m);
+                    IMUNRed[m * 8 + l ] = Util.MOD90(sB[l]);
 
                     // Util.WriteLine("Год= " + (m * 8 + l).ToString() + " И= " + IMUNBlue[m * 8 + l].ToString() + " Б= " + IMUNRed[m * 8 + l].ToString());
                 }
@@ -977,7 +1283,8 @@ namespace Numerolog
             for (ii =(int) numImmFrom.Value ; ii < (int)numImmTo.Value && ii < 8*12; ii++)
             {
                 d = bDate.Value;
-                d=d.AddYears(ii);
+               // d=d.AddYears(ii+1);
+                d = d.AddYears(ii );
                 seriesName = "Болезнь";
                 chartIMUN.Series[seriesName].Points.AddXY(d , IMUNRed[ii]);
 
@@ -995,6 +1302,108 @@ namespace Numerolog
 
 
         #endregion
+
+        #region "word+fio"
+        private string  WordCalc(string KEYWORD, string FIO)
+        {
+
+            string K = KEYWORD.Replace(" ", "");
+            int[] tempSB = Util.STRING2INTS(K);
+
+            string sOut =  "";
+            int wSz = tempSB.Length;
+            string data = (K + FIO).Replace(" ", "");
+            int Sz = data.Length;
+            int hSz = (int)Math.Ceiling((decimal)Sz / (decimal)wSz);
+            int[,] m = new int[wSz, hSz];
+
+            int t = 0;
+
+            for(int h=0; h <hSz; h++)
+            {
+                for (int w = 0; w < wSz; w++)
+                {
+                    if (t < Sz)
+                    {
+                        m[w, h] = Util.CODE_RU(data.Substring(t, 1));
+                        t++;
+                    }
+                    else
+                    {
+                        m[w, h] = 0;
+                    }
+                }
+            }
+
+
+            int[] r = new int[wSz];
+            int s;
+
+            // складываем по столбцам
+            for (int w = 0; w < wSz; w++)
+            {
+                s = 0;
+                for (int h = 0; h < hSz; h++)
+                {
+                    s += m[w, h];
+
+                  
+                }
+
+                while(s > 9)
+                {
+                    s = Util.NUM2CODE(s.ToString());
+                }
+
+                r[w] = s;
+            }
+
+            s = 0;
+            // складываем итоговую строку
+            for (int w = 0; w < wSz; w++)
+            {
+                s+=r[w];
+            }
+
+            s = Util.MOD22(s);
+
+            string lStr = "";
+            t = 0;
+
+            for (int h = 0; h < hSz; h++)
+            {
+                for (int w = 0; w < wSz; w++)
+                {
+                    if (t < Sz)
+                    {
+                        lStr += data.Substring(t, 1) + " ";
+                        t++;
+                    }
+
+                    
+                    sOut += m[w, h].ToString() + " ";
+                }
+                lStr += "\r\n";
+                sOut += "\r\n" ;
+            }
+
+            sOut += "\r\n";
+            for (int w = 0; w < wSz; w++)
+            {
+                sOut += r[w].ToString() + " ";
+            }
+            sOut += "\r\n\r\n";
+
+            sOut += "СУММА "+ s.ToString();
+
+
+            return lStr+"\r\n"+sOut;
+
+
+        }
+
+        #endregion
+
     }
 }
 

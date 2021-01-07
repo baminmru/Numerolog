@@ -32,12 +32,12 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.mainTab = new System.Windows.Forms.TabControl();
             this.tabParams = new System.Windows.Forms.TabPage();
@@ -160,6 +160,8 @@
             this.sMW = new System.Windows.Forms.TextBox();
             this.tabDayly = new System.Windows.Forms.TabPage();
             this.chartH = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.tabIM = new System.Windows.Forms.TabPage();
+            this.chartIM = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabIMMUNITY = new System.Windows.Forms.TabPage();
             this.numImmTo = new System.Windows.Forms.NumericUpDown();
             this.label44 = new System.Windows.Forms.Label();
@@ -167,30 +169,51 @@
             this.label43 = new System.Windows.Forms.Label();
             this.chartIMUN = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabConfig = new System.Windows.Forms.TabPage();
+            this.chkIMUN = new System.Windows.Forms.CheckBox();
             this.chkIM = new System.Windows.Forms.CheckBox();
             this.chkDayly = new System.Windows.Forms.CheckBox();
             this.chkOpenSavedFile = new System.Windows.Forms.CheckBox();
             this.cmdSaveFolder = new System.Windows.Forms.Button();
             this.txtSaveFolder = new System.Windows.Forms.TextBox();
             this.label33 = new System.Windows.Forms.Label();
+            this.tabWordCalc = new System.Windows.Forms.TabPage();
+            this.cmdCalcWord = new System.Windows.Forms.Button();
+            this.txtWordOut = new System.Windows.Forms.TextBox();
+            this.txtWORD = new System.Windows.Forms.TextBox();
+            this.label45 = new System.Windows.Forms.Label();
+            this.tabProg = new System.Windows.Forms.TabPage();
+            this.chkProgFIO = new System.Windows.Forms.CheckBox();
+            this.label48 = new System.Windows.Forms.Label();
+            this.label49 = new System.Windows.Forms.Label();
+            this.cmdProg = new System.Windows.Forms.Button();
+            this.txtProgOut = new System.Windows.Forms.TextBox();
+            this.dtpProgTo = new System.Windows.Forms.DateTimePicker();
+            this.dtpProgFrom = new System.Windows.Forms.DateTimePicker();
+            this.tabKritDates = new System.Windows.Forms.TabPage();
+            this.label47 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.txtCritLog = new System.Windows.Forms.TextBox();
+            this.dateCritTo = new System.Windows.Forms.DateTimePicker();
+            this.dateCritFrom = new System.Windows.Forms.DateTimePicker();
             this.fbd = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.tabIM = new System.Windows.Forms.TabPage();
-            this.chartIM = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.chkIMUN = new System.Windows.Forms.CheckBox();
             this.mainTab.SuspendLayout();
             this.tabParams.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numBHour)).BeginInit();
             this.tabSOTI.SuspendLayout();
             this.tabDayly.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartH)).BeginInit();
+            this.tabIM.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartIM)).BeginInit();
             this.tabIMMUNITY.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numImmTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numImmFrom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartIMUN)).BeginInit();
             this.tabConfig.SuspendLayout();
-            this.tabIM.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chartIM)).BeginInit();
+            this.tabWordCalc.SuspendLayout();
+            this.tabProg.SuspendLayout();
+            this.tabKritDates.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainTab
@@ -204,6 +227,9 @@
             this.mainTab.Controls.Add(this.tabIM);
             this.mainTab.Controls.Add(this.tabIMMUNITY);
             this.mainTab.Controls.Add(this.tabConfig);
+            this.mainTab.Controls.Add(this.tabWordCalc);
+            this.mainTab.Controls.Add(this.tabProg);
+            this.mainTab.Controls.Add(this.tabKritDates);
             this.mainTab.Location = new System.Drawing.Point(13, 21);
             this.mainTab.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.mainTab.Name = "mainTab";
@@ -330,16 +356,18 @@
             // label41
             // 
             this.label41.AutoSize = true;
+            this.label41.ForeColor = System.Drawing.Color.Blue;
             this.label41.Location = new System.Drawing.Point(765, 374);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(44, 20);
             this.label41.TabIndex = 103;
             this.label41.Text = "ПВЧ";
-            this.toolTip1.SetToolTip(this.label41, "Показатель вживаемости");
+            this.toolTip1.SetToolTip(this.label41, "Показатель вживаемости (макс. 100)");
             // 
             // label42
             // 
             this.label42.AutoSize = true;
+            this.label42.ForeColor = System.Drawing.Color.Blue;
             this.label42.Location = new System.Drawing.Point(765, 333);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(32, 20);
@@ -378,6 +406,7 @@
             // label38
             // 
             this.label38.AutoSize = true;
+            this.label38.ForeColor = System.Drawing.Color.Blue;
             this.label38.Location = new System.Drawing.Point(765, 293);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(42, 20);
@@ -388,6 +417,7 @@
             // label39
             // 
             this.label39.AutoSize = true;
+            this.label39.ForeColor = System.Drawing.Color.Blue;
             this.label39.Location = new System.Drawing.Point(765, 252);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(40, 20);
@@ -398,6 +428,7 @@
             // label40
             // 
             this.label40.AutoSize = true;
+            this.label40.ForeColor = System.Drawing.Color.Blue;
             this.label40.Location = new System.Drawing.Point(765, 214);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(31, 20);
@@ -829,7 +860,7 @@
             // vO
             // 
             this.vO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.vO.Location = new System.Drawing.Point(960, 156);
+            this.vO.Location = new System.Drawing.Point(960, 124);
             this.vO.Name = "vO";
             this.vO.ReadOnly = true;
             this.vO.Size = new System.Drawing.Size(62, 26);
@@ -839,7 +870,7 @@
             // vI
             // 
             this.vI.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.vI.Location = new System.Drawing.Point(960, 107);
+            this.vI.Location = new System.Drawing.Point(960, 95);
             this.vI.Name = "vI";
             this.vI.ReadOnly = true;
             this.vI.Size = new System.Drawing.Size(62, 26);
@@ -849,7 +880,7 @@
             // vF
             // 
             this.vF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.vF.Location = new System.Drawing.Point(960, 69);
+            this.vF.Location = new System.Drawing.Point(960, 66);
             this.vF.Name = "vF";
             this.vF.ReadOnly = true;
             this.vF.Size = new System.Drawing.Size(62, 26);
@@ -1052,7 +1083,7 @@
             // 
             this.txtO.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtO.Location = new System.Drawing.Point(266, 156);
+            this.txtO.Location = new System.Drawing.Point(266, 127);
             this.txtO.Name = "txtO";
             this.txtO.Size = new System.Drawing.Size(677, 26);
             this.txtO.TabIndex = 7;
@@ -1062,7 +1093,7 @@
             // 
             this.txtI.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtI.Location = new System.Drawing.Point(266, 110);
+            this.txtI.Location = new System.Drawing.Point(266, 98);
             this.txtI.Name = "txtI";
             this.txtI.Size = new System.Drawing.Size(677, 26);
             this.txtI.TabIndex = 6;
@@ -1081,7 +1112,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(35, 156);
+            this.label4.Location = new System.Drawing.Point(161, 130);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(83, 20);
@@ -1091,7 +1122,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(35, 110);
+            this.label3.Location = new System.Drawing.Point(204, 98);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 20);
@@ -1101,7 +1132,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(35, 69);
+            this.label2.Location = new System.Drawing.Point(163, 66);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(81, 20);
@@ -1123,7 +1154,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(35, 28);
+            this.label1.Location = new System.Drawing.Point(116, 32);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(128, 20);
@@ -1544,6 +1575,31 @@
             this.chartH.TabIndex = 0;
             this.chartH.Text = "chartH";
             // 
+            // tabIM
+            // 
+            this.tabIM.Controls.Add(this.chartIM);
+            this.tabIM.Location = new System.Drawing.Point(4, 29);
+            this.tabIM.Name = "tabIM";
+            this.tabIM.Size = new System.Drawing.Size(1039, 638);
+            this.tabIM.TabIndex = 5;
+            this.tabIM.Text = "Иммунитет";
+            this.tabIM.UseVisualStyleBackColor = true;
+            // 
+            // chartIM
+            // 
+            chartArea2.Name = "ChartArea1";
+            this.chartIM.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chartIM.Legends.Add(legend2);
+            this.chartIM.Location = new System.Drawing.Point(3, 3);
+            this.chartIM.Name = "chartIM";
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chartIM.Series.Add(series2);
+            this.chartIM.Size = new System.Drawing.Size(1033, 632);
+            this.chartIM.TabIndex = 1;
+            // 
             // tabIMMUNITY
             // 
             this.tabIMMUNITY.Controls.Add(this.numImmTo);
@@ -1633,6 +1689,17 @@
             this.tabConfig.Text = "Настройка";
             this.tabConfig.UseVisualStyleBackColor = true;
             // 
+            // chkIMUN
+            // 
+            this.chkIMUN.AutoSize = true;
+            this.chkIMUN.Location = new System.Drawing.Point(232, 274);
+            this.chkIMUN.Name = "chkIMUN";
+            this.chkIMUN.Size = new System.Drawing.Size(388, 24);
+            this.chkIMUN.TabIndex = 6;
+            this.chkIMUN.Text = "Сохранить график напряженности иммунитета";
+            this.chkIMUN.UseVisualStyleBackColor = true;
+            this.chkIMUN.CheckedChanged += new System.EventHandler(this.chkOpenSavedFile_CheckedChanged);
+            // 
             // chkIM
             // 
             this.chkIM.AutoSize = true;
@@ -1696,41 +1763,227 @@
             this.label33.TabIndex = 0;
             this.label33.Text = "Папка для сохранения";
             // 
-            // tabIM
+            // tabWordCalc
             // 
-            this.tabIM.Controls.Add(this.chartIM);
-            this.tabIM.Location = new System.Drawing.Point(4, 29);
-            this.tabIM.Name = "tabIM";
-            this.tabIM.Size = new System.Drawing.Size(1039, 638);
-            this.tabIM.TabIndex = 5;
-            this.tabIM.Text = "Иммунитет";
-            this.tabIM.UseVisualStyleBackColor = true;
+            this.tabWordCalc.Controls.Add(this.cmdCalcWord);
+            this.tabWordCalc.Controls.Add(this.txtWordOut);
+            this.tabWordCalc.Controls.Add(this.txtWORD);
+            this.tabWordCalc.Controls.Add(this.label45);
+            this.tabWordCalc.Location = new System.Drawing.Point(4, 29);
+            this.tabWordCalc.Name = "tabWordCalc";
+            this.tabWordCalc.Size = new System.Drawing.Size(1039, 638);
+            this.tabWordCalc.TabIndex = 6;
+            this.tabWordCalc.Text = "Расчет по фразе";
+            this.tabWordCalc.UseVisualStyleBackColor = true;
             // 
-            // chartIM
+            // cmdCalcWord
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chartIM.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chartIM.Legends.Add(legend2);
-            this.chartIM.Location = new System.Drawing.Point(3, 3);
-            this.chartIM.Name = "chartIM";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chartIM.Series.Add(series2);
-            this.chartIM.Size = new System.Drawing.Size(1033, 632);
-            this.chartIM.TabIndex = 1;
+            this.cmdCalcWord.Location = new System.Drawing.Point(236, 100);
+            this.cmdCalcWord.Name = "cmdCalcWord";
+            this.cmdCalcWord.Size = new System.Drawing.Size(771, 34);
+            this.cmdCalcWord.TabIndex = 111;
+            this.cmdCalcWord.Text = "Посчитать";
+            this.cmdCalcWord.UseVisualStyleBackColor = true;
+            this.cmdCalcWord.Click += new System.EventHandler(this.cmdCalcWord_Click);
             // 
-            // chkIMUN
+            // txtWordOut
             // 
-            this.chkIMUN.AutoSize = true;
-            this.chkIMUN.Location = new System.Drawing.Point(232, 274);
-            this.chkIMUN.Name = "chkIMUN";
-            this.chkIMUN.Size = new System.Drawing.Size(388, 24);
-            this.chkIMUN.TabIndex = 6;
-            this.chkIMUN.Text = "Сохранить график напряженности иммунитета";
-            this.chkIMUN.UseVisualStyleBackColor = true;
-            this.chkIMUN.CheckedChanged += new System.EventHandler(this.chkOpenSavedFile_CheckedChanged);
+            this.txtWordOut.Font = new System.Drawing.Font("Courier New", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtWordOut.Location = new System.Drawing.Point(62, 172);
+            this.txtWordOut.Multiline = true;
+            this.txtWordOut.Name = "txtWordOut";
+            this.txtWordOut.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtWordOut.Size = new System.Drawing.Size(945, 425);
+            this.txtWordOut.TabIndex = 110;
+            // 
+            // txtWORD
+            // 
+            this.txtWORD.ForeColor = System.Drawing.Color.Blue;
+            this.txtWORD.Location = new System.Drawing.Point(236, 45);
+            this.txtWORD.Name = "txtWORD";
+            this.txtWORD.Size = new System.Drawing.Size(771, 26);
+            this.txtWORD.TabIndex = 109;
+            this.txtWORD.Text = "ЗДОРОВЬЕ";
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.ForeColor = System.Drawing.Color.Blue;
+            this.label45.Location = new System.Drawing.Point(58, 48);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(159, 20);
+            this.label45.TabIndex = 108;
+            this.label45.Text = "Фраза для расчета";
+            // 
+            // tabProg
+            // 
+            this.tabProg.Controls.Add(this.chkProgFIO);
+            this.tabProg.Controls.Add(this.label48);
+            this.tabProg.Controls.Add(this.label49);
+            this.tabProg.Controls.Add(this.cmdProg);
+            this.tabProg.Controls.Add(this.txtProgOut);
+            this.tabProg.Controls.Add(this.dtpProgTo);
+            this.tabProg.Controls.Add(this.dtpProgFrom);
+            this.tabProg.Location = new System.Drawing.Point(4, 29);
+            this.tabProg.Name = "tabProg";
+            this.tabProg.Padding = new System.Windows.Forms.Padding(3);
+            this.tabProg.Size = new System.Drawing.Size(1039, 638);
+            this.tabProg.TabIndex = 8;
+            this.tabProg.Text = "Прогностика";
+            this.tabProg.UseVisualStyleBackColor = true;
+            // 
+            // chkProgFIO
+            // 
+            this.chkProgFIO.AutoSize = true;
+            this.chkProgFIO.Checked = true;
+            this.chkProgFIO.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkProgFIO.Location = new System.Drawing.Point(472, 42);
+            this.chkProgFIO.Name = "chkProgFIO";
+            this.chkProgFIO.Size = new System.Drawing.Size(189, 24);
+            this.chkProgFIO.TabIndex = 122;
+            this.chkProgFIO.Text = "использовать Ф.И.О.";
+            this.chkProgFIO.UseVisualStyleBackColor = true;
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(234, 46);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(27, 20);
+            this.label48.TabIndex = 121;
+            this.label48.Text = "по";
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(52, 46);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(20, 20);
+            this.label49.TabIndex = 120;
+            this.label49.Text = "C";
+            // 
+            // cmdProg
+            // 
+            this.cmdProg.Location = new System.Drawing.Point(41, 93);
+            this.cmdProg.Name = "cmdProg";
+            this.cmdProg.Size = new System.Drawing.Size(945, 41);
+            this.cmdProg.TabIndex = 119;
+            this.cmdProg.Text = "Посчитать";
+            this.cmdProg.UseVisualStyleBackColor = true;
+            this.cmdProg.Click += new System.EventHandler(this.cmdProg_Click);
+            // 
+            // txtProgOut
+            // 
+            this.txtProgOut.Font = new System.Drawing.Font("Courier New", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtProgOut.Location = new System.Drawing.Point(41, 152);
+            this.txtProgOut.Multiline = true;
+            this.txtProgOut.Name = "txtProgOut";
+            this.txtProgOut.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtProgOut.Size = new System.Drawing.Size(945, 461);
+            this.txtProgOut.TabIndex = 118;
+            // 
+            // dtpProgTo
+            // 
+            this.dtpProgTo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtpProgTo.CustomFormat = "dd.MM.yyyy";
+            this.dtpProgTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dtpProgTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpProgTo.Location = new System.Drawing.Point(277, 37);
+            this.dtpProgTo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dtpProgTo.Name = "dtpProgTo";
+            this.dtpProgTo.Size = new System.Drawing.Size(135, 29);
+            this.dtpProgTo.TabIndex = 117;
+            // 
+            // dtpProgFrom
+            // 
+            this.dtpProgFrom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtpProgFrom.CustomFormat = "dd.MM.yyyy";
+            this.dtpProgFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dtpProgFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpProgFrom.Location = new System.Drawing.Point(79, 37);
+            this.dtpProgFrom.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dtpProgFrom.Name = "dtpProgFrom";
+            this.dtpProgFrom.Size = new System.Drawing.Size(135, 29);
+            this.dtpProgFrom.TabIndex = 116;
+            // 
+            // tabKritDates
+            // 
+            this.tabKritDates.Controls.Add(this.label47);
+            this.tabKritDates.Controls.Add(this.label46);
+            this.tabKritDates.Controls.Add(this.button1);
+            this.tabKritDates.Controls.Add(this.txtCritLog);
+            this.tabKritDates.Controls.Add(this.dateCritTo);
+            this.tabKritDates.Controls.Add(this.dateCritFrom);
+            this.tabKritDates.Location = new System.Drawing.Point(4, 29);
+            this.tabKritDates.Name = "tabKritDates";
+            this.tabKritDates.Size = new System.Drawing.Size(1039, 638);
+            this.tabKritDates.TabIndex = 7;
+            this.tabKritDates.Text = "Критические даты";
+            this.tabKritDates.UseVisualStyleBackColor = true;
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(426, 37);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(27, 20);
+            this.label47.TabIndex = 115;
+            this.label47.Text = "по";
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(58, 37);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(20, 20);
+            this.label46.TabIndex = 114;
+            this.label46.Text = "C";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(47, 84);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(945, 41);
+            this.button1.TabIndex = 113;
+            this.button1.Text = "Посчитать";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // txtCritLog
+            // 
+            this.txtCritLog.Font = new System.Drawing.Font("Courier New", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtCritLog.Location = new System.Drawing.Point(47, 143);
+            this.txtCritLog.Multiline = true;
+            this.txtCritLog.Name = "txtCritLog";
+            this.txtCritLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtCritLog.Size = new System.Drawing.Size(945, 461);
+            this.txtCritLog.TabIndex = 112;
+            // 
+            // dateCritTo
+            // 
+            this.dateCritTo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateCritTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dateCritTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateCritTo.Location = new System.Drawing.Point(530, 30);
+            this.dateCritTo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dateCritTo.Name = "dateCritTo";
+            this.dateCritTo.Size = new System.Drawing.Size(135, 29);
+            this.dateCritTo.TabIndex = 3;
+            // 
+            // dateCritFrom
+            // 
+            this.dateCritFrom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateCritFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dateCritFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateCritFrom.Location = new System.Drawing.Point(166, 30);
+            this.dateCritFrom.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dateCritFrom.Name = "dateCritFrom";
+            this.dateCritFrom.Size = new System.Drawing.Size(135, 29);
+            this.dateCritFrom.TabIndex = 2;
             // 
             // Form1
             // 
@@ -1754,6 +2007,8 @@
             this.tabSOTI.PerformLayout();
             this.tabDayly.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chartH)).EndInit();
+            this.tabIM.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chartIM)).EndInit();
             this.tabIMMUNITY.ResumeLayout(false);
             this.tabIMMUNITY.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numImmTo)).EndInit();
@@ -1761,8 +2016,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.chartIMUN)).EndInit();
             this.tabConfig.ResumeLayout(false);
             this.tabConfig.PerformLayout();
-            this.tabIM.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chartIM)).EndInit();
+            this.tabWordCalc.ResumeLayout(false);
+            this.tabWordCalc.PerformLayout();
+            this.tabProg.ResumeLayout(false);
+            this.tabProg.PerformLayout();
+            this.tabKritDates.ResumeLayout(false);
+            this.tabKritDates.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1908,6 +2167,26 @@
         private System.Windows.Forms.TabPage tabIM;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartIM;
         private System.Windows.Forms.CheckBox chkIMUN;
+        private System.Windows.Forms.TabPage tabWordCalc;
+        private System.Windows.Forms.TextBox txtWORD;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.Button cmdCalcWord;
+        private System.Windows.Forms.TextBox txtWordOut;
+        private System.Windows.Forms.TabPage tabKritDates;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox txtCritLog;
+        private System.Windows.Forms.DateTimePicker dateCritTo;
+        private System.Windows.Forms.DateTimePicker dateCritFrom;
+        private System.Windows.Forms.TabPage tabProg;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.Button cmdProg;
+        private System.Windows.Forms.TextBox txtProgOut;
+        private System.Windows.Forms.DateTimePicker dtpProgTo;
+        private System.Windows.Forms.DateTimePicker dtpProgFrom;
+        private System.Windows.Forms.CheckBox chkProgFIO;
     }
 }
 
