@@ -177,6 +177,8 @@
             this.txtSaveFolder = new System.Windows.Forms.TextBox();
             this.label33 = new System.Windows.Forms.Label();
             this.tabWordCalc = new System.Windows.Forms.TabPage();
+            this.chkMndlDebug = new System.Windows.Forms.CheckBox();
+            this.cmdMandala = new System.Windows.Forms.Button();
             this.cmdCalcWord = new System.Windows.Forms.Button();
             this.txtWordOut = new System.Windows.Forms.TextBox();
             this.txtWORD = new System.Windows.Forms.TextBox();
@@ -1087,7 +1089,7 @@
             this.txtO.Name = "txtO";
             this.txtO.Size = new System.Drawing.Size(677, 26);
             this.txtO.TabIndex = 7;
-            this.txtO.Text = "Михайлович";
+            this.txtO.Text = "Олегович";
             // 
             // txtI
             // 
@@ -1097,7 +1099,7 @@
             this.txtI.Name = "txtI";
             this.txtI.Size = new System.Drawing.Size(677, 26);
             this.txtI.TabIndex = 6;
-            this.txtI.Text = "Михаил";
+            this.txtI.Text = "Иван";
             // 
             // txtF
             // 
@@ -1107,7 +1109,7 @@
             this.txtF.Name = "txtF";
             this.txtF.Size = new System.Drawing.Size(677, 26);
             this.txtF.TabIndex = 5;
-            this.txtF.Text = "Баранов";
+            this.txtF.Text = "Абросимов";
             // 
             // label4
             // 
@@ -1765,6 +1767,8 @@
             // 
             // tabWordCalc
             // 
+            this.tabWordCalc.Controls.Add(this.chkMndlDebug);
+            this.tabWordCalc.Controls.Add(this.cmdMandala);
             this.tabWordCalc.Controls.Add(this.cmdCalcWord);
             this.tabWordCalc.Controls.Add(this.txtWordOut);
             this.tabWordCalc.Controls.Add(this.txtWORD);
@@ -1773,8 +1777,28 @@
             this.tabWordCalc.Name = "tabWordCalc";
             this.tabWordCalc.Size = new System.Drawing.Size(1039, 638);
             this.tabWordCalc.TabIndex = 6;
-            this.tabWordCalc.Text = "Расчет по фразе";
+            this.tabWordCalc.Text = "Мандала\\Фраза";
             this.tabWordCalc.UseVisualStyleBackColor = true;
+            // 
+            // chkMndlDebug
+            // 
+            this.chkMndlDebug.AutoSize = true;
+            this.chkMndlDebug.Location = new System.Drawing.Point(65, 33);
+            this.chkMndlDebug.Name = "chkMndlDebug";
+            this.chkMndlDebug.Size = new System.Drawing.Size(96, 24);
+            this.chkMndlDebug.TabIndex = 113;
+            this.chkMndlDebug.Text = "Отладка";
+            this.chkMndlDebug.UseVisualStyleBackColor = true;
+            // 
+            // cmdMandala
+            // 
+            this.cmdMandala.Location = new System.Drawing.Point(62, 63);
+            this.cmdMandala.Name = "cmdMandala";
+            this.cmdMandala.Size = new System.Drawing.Size(136, 70);
+            this.cmdMandala.TabIndex = 112;
+            this.cmdMandala.Text = "Мандала";
+            this.cmdMandala.UseVisualStyleBackColor = true;
+            this.cmdMandala.Click += new System.EventHandler(this.cmdMandala_Click);
             // 
             // cmdCalcWord
             // 
@@ -1799,9 +1823,9 @@
             // txtWORD
             // 
             this.txtWORD.ForeColor = System.Drawing.Color.Blue;
-            this.txtWORD.Location = new System.Drawing.Point(236, 45);
+            this.txtWORD.Location = new System.Drawing.Point(513, 45);
             this.txtWORD.Name = "txtWORD";
-            this.txtWORD.Size = new System.Drawing.Size(771, 26);
+            this.txtWORD.Size = new System.Drawing.Size(494, 26);
             this.txtWORD.TabIndex = 109;
             this.txtWORD.Text = "ЗДОРОВЬЕ";
             // 
@@ -1809,7 +1833,7 @@
             // 
             this.label45.AutoSize = true;
             this.label45.ForeColor = System.Drawing.Color.Blue;
-            this.label45.Location = new System.Drawing.Point(58, 48);
+            this.label45.Location = new System.Drawing.Point(241, 45);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(159, 20);
             this.label45.TabIndex = 108;
@@ -2187,6 +2211,8 @@
         private System.Windows.Forms.DateTimePicker dtpProgTo;
         private System.Windows.Forms.DateTimePicker dtpProgFrom;
         private System.Windows.Forms.CheckBox chkProgFIO;
+        private System.Windows.Forms.Button cmdMandala;
+        private System.Windows.Forms.CheckBox chkMndlDebug;
     }
 }
 

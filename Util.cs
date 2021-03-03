@@ -25,6 +25,13 @@ namespace Numerolog
             Log = "";
         }
 
+        public static string StringReverse(string s)
+        {
+            char[] charArray = s.ToCharArray();
+            Array.Reverse(charArray);
+            return new string(charArray);
+        }
+
         public static int CODE_RU(string S)
         {
             int i;
@@ -172,6 +179,12 @@ namespace Numerolog
         {
             if (v == 0) return 22;
             return ((v - 1) % 22) + 1;
+        }
+
+        public static int MOD64(int v)
+        {
+            if (v == 0) return 64;
+            return ((v - 1) % 64) + 1;
         }
 
 
